@@ -21,9 +21,38 @@
 
 class HorseOnPhonepad:
     # @construrctor HorseOnPhonepad
-    #   - here all the moves are set up for which a knight from either position can make
+    #   - here all the moves for which a knight from either position can make
     def __init__(self):
-        self.moves = {0:[4, 6], 1:[6, 8], 2:[7, 9], 3:[4, 8], 4:[0, 3, 9], 5:[], 6:[0, 1, 7], 7:[2, 6], 8:[1, 3], 9:[2, 4]}
+        # self.moves = {0:[4, 6], 1:[6, 8], 2:[7, 9], 3:[4, 8], 4:[0, 3, 9], 5:[], 6:[0, 1, 7], 7:[2, 6], 8:[1, 3], 9:[2, 4]}
+        self.moves = self.findKnightMoves()
+
+    # @method findKnightMoves - finds all the moves of a knight in a phone pad.
+    def findKnightMoves(self):
+        phonepad = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [-1, 0, -1],
+        ]
+        moves = [[2, 1], [-2, 1], [2, -1], [-2, -1], [1, 2], [-1, 2], [1, -2], [-1, -2]]
+
+        temp = {}
+        for i in range(0, 10):
+            temp[i] = []
+            for j in range(len(phonepad)):
+                for k in range(len(phonepad[0])):
+                    if phonepad[j][k] == i:
+                        for move in moves:
+                            position = (j + move[0], k + move[1])
+                            if position[0] >= 0 and position[1] >= 0 and position[0] < len(phonepad) and position[
+                                1] < len(phonepad[0]) and phonepad[position[0]][position[1]] >= 0:
+                                if phonepad[position[0]][position[1]] != -1:
+                                    test = temp[i]
+                                    test.append(phonepad[position[0]][position[1]])
+                                    test = set(test)
+                                    temp[i] = sorted(list(test))
+
+        return temp
 
     # @method helper uses recursion to branch on the moves that a knight can jump to
     #       - @param N - number of hops that a knight can do

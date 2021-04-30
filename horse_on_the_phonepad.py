@@ -37,20 +37,19 @@ class HorseOnPhonepad:
         moves = [[2, 1], [-2, 1], [2, -1], [-2, -1], [1, 2], [-1, 2], [1, -2], [-1, -2]]
 
         knight_moves = {}
-        for i in range(0, 10):
-            knight_moves[i] = []
-            for j in range(len(phonepad)):
-                for k in range(len(phonepad[0])):
-                    if phonepad[j][k] == i:
-                        for move in moves:
-                            position = (j + move[0], k + move[1])
-                            if position[0] >= 0 and position[1] >= 0 and position[0] < len(phonepad) and position[
-                                1] < len(phonepad[0]) and phonepad[position[0]][position[1]] >= 0:
-                                if phonepad[position[0]][position[1]] != -1:
-                                    temp_list = knight_moves[i]
-                                    temp_list.append(phonepad[position[0]][position[1]])
-                                    temp_list = set(temp_list)
-                                    knight_moves[i] = sorted(list(temp_list))
+        for j in range(len(phonepad)):
+            for k in range(len(phonepad[0])):
+                if phonepad[j][k] != -1:
+                    knight_moves[phonepad[j][k]] = []
+                    for move in moves:
+                        position = (j + move[0], k + move[1])
+                        if position[0] >= 0 and position[1] >= 0 and position[0] < len(phonepad) and position[
+                            1] < len(phonepad[0]) and phonepad[position[0]][position[1]] >= 0:
+                            if phonepad[position[0]][position[1]] != -1:
+                                temp_list = knight_moves[phonepad[j][k]]
+                                temp_list.append(phonepad[position[0]][position[1]])
+                                temp_list = set(temp_list)
+                                knight_moves[phonepad[j][k]] = sorted(list(temp_list))
 
         return knight_moves
 

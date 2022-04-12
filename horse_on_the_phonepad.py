@@ -54,10 +54,11 @@ try:
 	if N == -1 or S == -1:
 		print('The arguments are not correct!!!')
 		print('Example: "python horse_on_the_phonepad.py N 4 S 1"')
-		sys.exit(0)
-		
-	print('You can dial {0} distinct numbers in {1} hops from a starting position of {2}.'.format(horse_on_phonepad(N, S), N, S))
+
+	else:
+		print('You can dial {0} distinct numbers in {1} hops from a starting position of {2}.'.format(horse_on_phonepad(N, S), N, S))
 
 except Exception as e:
+	print(e)
 	print('The arguments are not correct!!!')
 	print('Example: "python horse_on_the_phonepad.py N 4 S 1"')
